@@ -22,6 +22,7 @@ export default function App() {
       </View>
     );
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text>Poc Conexa Meet webview</Text>
