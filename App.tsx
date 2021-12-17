@@ -2,12 +2,11 @@ import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { WebView } from "react-native-webview";
-import { url } from "./url";
+import { url } from "./constants";
 import { Camera } from "expo-camera";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
 
   useEffect(() => {
     (async () => {
@@ -30,10 +29,10 @@ export default function App() {
       <WebView
         style={styles.webview}
         javaScriptEnabled
+        pullToRefreshEnabled
         source={{
           uri: url,
         }}
-        onNavigationStateChange={(e) => console.log(e.url.split("?")[0])}
         startInLoadingState
         allowsInlineMediaPlayback
         allowsFullscreenVideo
@@ -58,8 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     zIndex: 20,
     flexGrow: 1,
-    width: 320,
-    height: 400,
+    width: 4000,
     maxWidth: "100%",
   },
 });
