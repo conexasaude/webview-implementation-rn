@@ -10,8 +10,12 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === "granted");
+      const allGranted = await Promise.all([
+        Camera.requestCameraPermissionsAsync(),
+        Camera.requestMicrophonePermissionsAsync(), // Necessário no Android
+      ]).then((results) => results.every((result) => result.granted));
+
+      setHasPermission(allGranted);
     })();
   }, []);
 
